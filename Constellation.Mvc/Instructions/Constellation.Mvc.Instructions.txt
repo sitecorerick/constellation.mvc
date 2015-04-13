@@ -1,0 +1,171 @@
+﻿Introduction
+============
+Use this library to enhance ASP.NET MVC 5 projects. Add this NuGet Package to your Web Application project.
+This package aims to replace the default MVC 5 IoC container with StructureMap. It also supports AutoMapper
+for convenient property passing between domain Models and ViewModels. There are a variety of ActionResult and
+Controller improvements/extensions. Finally, this package enhances the application stack by adding support 
+for Application-event level tasks.
+
+This library was heavily influenced by Matt Honeycutt's Pluralsight course on building your own application
+framework with ASP.NET MVC 5:
+http://www.pluralsight.com/courses/build-application-framework-aspdotnet-mvc-5 
+Which comes highly recommended for both inspiration on how to use MVC 5 as well as understanding the reasons
+behind the features of this package. Seriously. Go watch it. He's awesome.
+
+============
+Installation
+============
+
+Change your global.asax file to inherit from Constellation.Mvc.HttpApplication - See HttpApplication below
+for further customization options.
+
+When creating controllers, inherit from Constellation.Mvc.Controllers.ConstellationController.
+
+When creating ViewModels, inherit from IMapFrom<T> to enable AutoMapper conversion from business models to 
+view models.
+
+Implement a StructureMap registry for your ORM system.
+Implement a StructureMap registry for your Authentication system.
+
+Almost everything else is discoverable through intellisense, and/or has very safe defaults. You are encouraged
+to review the source code for this project to see how to further extend it.
+
+
+================================
+Core Component - HttpApplication
+================================
+the HttpApplication class replaces the default inheritance of your Global.ASAX file in your web application
+project. It implements Application_Start, Application_BeginRequest and Application_EndRequest, handling the 
+initialization of the StructureMap container, the event task subsystem, and any other of the core features
+of this package. This class offers some additional extension points around Application Start:
+
+Application_Start_RegisterConfigs - Allows you to provide registration for common App_Start classes.
+
+Application_Start_InitializeDatabase - Allows you to initialize your persistence medium, such as Entity Framework.
+
+Application_Start_Add_StructureMap_Registries - Allows you to initialize any custom StructureMap registries
+												beyond those included in this package.
+
+In all cases, including stock Global.ASAX methods, it is wise to call the base method during your override, I
+recommend calling the base method before adding your own customizations.
+
+
+============
+StructureMap 
+============
+You can get the IContainer from the HttpContext item by calling .GetContainer(). Assuming the "stock" implementation
+of this package, you will get an IContainer scoped to the current request.
+
+This package overrides the stock FilterAttributeFilterProvider to allow StructureMap to populate dependencies on 
+Action Filters.
+
+StructureMap uses Registries to specify how to resolve dependencies at runtime. There are a number of provided
+registries that are required to bootstrap the functionality of this package, but you can extend your project
+with your own registries (ex: you'll need to create your own for Entity Framework Context). Here is what
+is registered out-of-the-box:
+
+MvcRegistry:
+RouteCollection, IIdentity, HttpSessionStateBase, HttpContextBase, HttpServerUtilityBase.
+
+ControllerRegistry:
+Anything in your project(s) that descends from Controller and can be instantiated. Microsoft namespaces are excluded.
+
+ActionFilterRegistry:
+Anything that is an ActionFilterAttribute that requires something besides a String to instantiate.
+
+ApplicationTaskRegistry:
+Anything that implements IApplicationTask
+
+ModelMetadataModifierRegistry:
+Anything that implements IModelMetadataModifier
+
+DefaultRegistery:
+Anything that fits StructureMap's default conventions
+
+Typically you will need to implement your own registry for your Authentication Provider and for your Database Provider/ORM subsystem.
+
+
+==============
+Alerts Feature
+==============
+Alerts are small objects that are added to the TempData of a view by the controller. There are several types:
+Error, Info, Success, and Warning. The purpose of an Alert is to inform the user about the status of their
+last action, for example, submitting an update or delete request for an object. In addition to the basic Alert
+classes, there are a numbrer of supporting extensions that make Alerts useful:
+
+TempData.GetAlerts() - gets all the alerts assigned to the particular ViewResult.
+
+AlertActionResultExtensions:
+
+ActionResult.AddSuccessAlert(message) - creates a SuccessAlert with the supplied message and adds it to TempData.
+
+ActionResult.AddInfoAlert(message) - creates an InfoAlert with the supplied message and adds it to TempData.
+
+ActionResult.AddWarningAlert(message) - creates a WarningAlert with the supplied message and adds it to TempData.
+
+ActionResult.AddErrorAlert(message) - creates an ErrorAlert with the supplied message and adds it to TempData.
+
+
+=============
+Json Features
+=============
+
+ConstellationJsonResult extends the stock JsonResult to:
+- Enforce HttpPost by default (can be disabled by supplying a different JsonRequestBehavior value)
+- Supplies a 400 HttpStatusCode for errors and includes a list of Json Error objects as a result.
+- Converts C# member names to camelcase for "friendlier" Json on the client side.
+
+ConstellationController has native local support for:
+- JsonValidationError result
+- JsonError result
+- JsonSuccess<T> result
+
+Note that these replace the stock Json<T> result in the system Controller.
+
+
+=================================
+Auto-discovered Application Tasks
+=================================
+On startup, StructureMap will scan for ApplicationTasks that will be fired at appropriate times in the 
+application's life cycle. Simply implement the appropriate interface:
+
+IOnApplicationInitTask
+IOnApplicationStartTask
+IOnErrorTask
+IOnRequestEndTask
+IOnRequestStartTask
+
+
+=============================
+Model Mapping with AutoMapper
+=============================
+To map your ViewModels to your business Models, your ViewModels should inherit from:
+
+- IMapFrom<T> where T is the business Model type - standard AutoMapper property mapping applies.
+
+- IMapFromCustomConfiguration - Requires you to implement your own AutoMapper configuration for the ViewModel.
+
+
+=========================
+ModelMetadata Awesomeness
+=========================
+These classes allow you to transform the metadata of the ViewModel as it is handed off to the View. Two are
+provided by default (and are active by default) for two very common scenarios:
+
+- ProvideDefaultDataTypeForReadOnlyProperty - If a Model property has the ReadOnly attribute, adds a DataType
+											attribute of name "ReadOnly", which allows you to build a Display 
+											or Editor Template for "ReadOnly" properties.
+
+- ProvideDefaultDisplayName - Given a Pascal-case Property name, adds a DisplayName attribute to the property
+								where the Name value is the Property name with spaces inserted before capital
+								letters and numbers. Very convenient if you're fond of EditorFor().
+
+
+You can create your own Model Metadata Modifiers by descending from IModelMetadataModifier.
+
+
+===================
+Enhanced Controller
+===================
+ConstellationController contains the improved Json methods as described above, but also contains the very handy 
+RedirectToAction() method.

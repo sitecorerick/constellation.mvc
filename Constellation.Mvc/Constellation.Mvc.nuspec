@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+	<id>$id$</id>
+	<version>$version$</version>
+	<title>$title$</title>
+	<authors>Richard J. Cabral</authors>
+	<owners>Richard J. Cabral</owners>
+	<projectUrl>https://github.com/sitecorerick/constellation.mvc</projectUrl>
+	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<summary>An MVC 5 framework to reduce uninteresting concerns</summary>
+	<description>
+		Uses StructureMap and AutoMapper. Provides the following:
+		- Automatic discovery and execution of application event-level tasks.
+		- Support for Alerts in ActionResults
+		- Controller extensions with better Json support
+		- AutoMapper directives through Interfaces
+		- "Smart" Default Model Metadata values
+	</description>
+	<releaseNotes>Initial Release.</releaseNotes>
+	<copyright>Copyright 2015</copyright>
+	<tags>MVC 5, StructureMap, Automapper</tags>
+  </metadata>
+</package>
