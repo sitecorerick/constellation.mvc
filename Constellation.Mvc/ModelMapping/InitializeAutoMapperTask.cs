@@ -31,6 +31,8 @@ namespace Constellation.Mvc.ModelMapping
 
 				LoadStandardMappings(types);
 
+				LoadReversibleMappings(types);
+
 				LoadCustomMappings(types);
 			}
 		}
@@ -66,6 +68,26 @@ namespace Constellation.Mvc.ModelMapping
 			foreach (var map in maps)
 			{
 				Mapper.CreateMap(map.Source, map.Destination);
+			}
+		}
+
+		private static void LoadReversibleMappings(IEnumerable<Type> types)
+		{
+			var maps = (from t in types
+						from i in t.GetInterfaces()
+						where i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IReversibleMapFrom<>) &&
+							  !t.IsAbstract &&
+							  !t.IsInterface
+						select new
+						{
+							Source = i.GetGenericArguments()[0],
+							Destination = t
+						}).ToArray();
+
+			foreach (var map in maps)
+			{
+				Mapper.CreateMap(map.Source, map.Destination);
+				Mapper.CreateMap(map.Destination, map.Source);
 			}
 		}
 

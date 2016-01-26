@@ -6,7 +6,7 @@
 	/// <summary>
 	/// Flag contract that allows AutoMapper to map using a provided configuration set.
 	/// </summary>
-	public interface IMapFromCustomConfiguration
+	public interface IMapFromCustomConfiguration : IMappable
 	{
 		/// <summary>
 		/// Creates the AutoMapper mapping rules for the Object from the provided configuration.

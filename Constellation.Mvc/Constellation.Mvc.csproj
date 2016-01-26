@@ -125,7 +125,9 @@
     <Compile Include="ModelMapping\IMapFrom.cs" />
     <Compile Include="ModelMapping\IMapFromCustomConfiguration.cs" />
     <Compile Include="Injection\Registries\ModelMetadataModifierRegistry.cs" />
+    <Compile Include="ModelMapping\IMappable.cs" />
     <Compile Include="ModelMapping\InitializeAutoMapperTask.cs" />
+    <Compile Include="ModelMapping\IReversibleMapFrom.cs" />
     <Compile Include="ModelMetadata\ModelMetadataProvider.cs" />
     <Compile Include="ModelMetadata\Modifiers\ProvideDefaultDisplayName.cs" />
     <Compile Include="ModelMetadata\Modifiers\IModelMetadataModifier.cs" />
@@ -136,7 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Constellation.Mvc.nuspec" />
+    <None Include="Constellation.Mvc.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

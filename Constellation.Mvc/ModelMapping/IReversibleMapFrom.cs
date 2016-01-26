@@ -1,5 +1,4 @@
-﻿
-namespace Constellation.Mvc.ModelMapping
+﻿namespace Constellation.Mvc.ModelMapping
 {
 	using System.Diagnostics.CodeAnalysis;
 
@@ -9,7 +8,7 @@ namespace Constellation.Mvc.ModelMapping
 	/// <typeparam name="TSourceType">The source type
 	/// </typeparam>
 	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-	public interface IMapFrom<TSourceType> : IMappable
+	public interface IReversibleMapFrom<TSourceType> : IMappable
 	{
 	}
 }

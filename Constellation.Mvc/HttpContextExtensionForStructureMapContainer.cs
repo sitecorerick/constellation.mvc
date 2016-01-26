@@ -21,7 +21,18 @@
 		/// </returns>
 		public static IContainer GetContainer(this HttpContextBase context)
 		{
+			return GetContainer();
+		}
+
+		public static IContainer GetContainer(this HttpContext context)
+		{
+			return GetContainer();
+		}
+
+		private static IContainer GetContainer()
+		{
 			return (IContainer)HttpContext.Current.Items["structuremap_container"] ?? ContainerFactory.Container;
 		}
+
 	}
 }
