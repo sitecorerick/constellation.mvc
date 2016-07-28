@@ -3,7 +3,7 @@
 	using Constellation.Mvc.ModelMetadata;
 	using Constellation.Mvc.ModelMetadata.Modifiers;
 
-	using StructureMap.Configuration.DSL;
+	using StructureMap;
 	using StructureMap.Graph;
 
 	/// <summary>

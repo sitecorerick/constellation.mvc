@@ -2,7 +2,7 @@
 {
 	using Constellation.Mvc.ApplicationTasks;
 
-	using StructureMap.Configuration.DSL;
+	using StructureMap;
 	using StructureMap.Graph;
 
 	/// <summary>

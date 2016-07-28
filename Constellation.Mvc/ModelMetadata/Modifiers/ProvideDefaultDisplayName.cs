@@ -2,7 +2,6 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Text.RegularExpressions;
 	using System.Web.Mvc;
 
 	/// <summary>
@@ -46,16 +45,7 @@
 		/// </returns>
 		private string InsertSpacesIntoPascalCasedString(string propertyName)
 		{
-			return Regex.Replace(
-			   propertyName,
-			   "(?<!^)" +
-			   "(" +
-			   "  [A-Z][a-z] |" +
-			   "  (?<=[a-z])[A-Z] |" +
-			   "  (?<![A-Z])[A-Z]$" +
-			   ")",
-			   " $1",
-			   RegexOptions.IgnorePatternWhitespace);
+			return propertyName.ConvertPascalToTitle();
 		}
 	}
 }

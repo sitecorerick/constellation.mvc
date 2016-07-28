@@ -1,6 +1,6 @@
 ﻿namespace Constellation.Mvc.InjectionRegistration
 {
-	using StructureMap.Configuration.DSL;
+	using StructureMap;
 	using System.Security.Principal;
 	using System.Web;
 	using System.Web.Routing;

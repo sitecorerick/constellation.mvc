@@ -2,8 +2,9 @@
 
 namespace Constellation.Mvc.InjectionRegistration.Conventions
 {
-	using StructureMap.Configuration.DSL;
+	using StructureMap;
 	using StructureMap.Graph;
+	using StructureMap.Graph.Scanning;
 	using StructureMap.Pipeline;
 	using StructureMap.TypeRules;
 	using System.Web.Mvc;
@@ -28,6 +29,17 @@ namespace Constellation.Mvc.InjectionRegistration.Conventions
 			{
 				registry.For(type).LifecycleIs(new UniquePerRequestLifecycle());
 			}
+		}
+
+		public void ScanTypes(TypeSet types, Registry registry)
+		{
+			var concretes = types.FindTypes(TypeClassification.Concretes | TypeClassification.Closed);
+
+			foreach (var type in concretes)
+			{
+				Process(type, registry);
+			}
+
 		}
 	}
 }

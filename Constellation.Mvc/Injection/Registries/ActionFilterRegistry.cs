@@ -2,7 +2,6 @@
 {
 	using Constellation.Mvc.ActionFilters;
 	using StructureMap;
-	using StructureMap.Configuration.DSL;
 	using StructureMap.TypeRules;
 	using System;
 	using System.Web.Mvc;

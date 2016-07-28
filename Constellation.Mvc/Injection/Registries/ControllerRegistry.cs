@@ -1,9 +1,8 @@
 ﻿namespace Constellation.Mvc.InjectionRegistration
 {
-
 	using Constellation.Mvc.InjectionRegistration.Conventions;
 
-	using StructureMap.Configuration.DSL;
+	using StructureMap;
 	using StructureMap.Graph;
 
 	/// <summary>

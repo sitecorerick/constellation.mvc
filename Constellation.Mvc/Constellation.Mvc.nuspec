@@ -17,7 +17,7 @@
 		- AutoMapper directives through Interfaces
 		- "Smart" Default Model Metadata values
 	</description>
-	<releaseNotes>Adapted the ContainerExtension so it worked with regular old HttpContext as well as HttpContextBase</releaseNotes>
+	<releaseNotes>Reversed an inheritance check.</releaseNotes>
 	<copyright>Copyright 2015</copyright>
 	<tags>MVC 5, StructureMap, Automapper</tags>
   </metadata>

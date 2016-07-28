@@ -87,7 +87,6 @@
 			AreaRegistration.RegisterAllAreas();
 			Application_Start_RegisterConfigs();
 			Application_Start_InitializeDatabase();
-
 			DependencyResolver.SetResolver(new StructureMapDependencyResolver(() => Container ?? ContainerFactory.Container));
 			Application_Start_Add_StructureMap_Registries();
 
@@ -105,10 +104,11 @@
 			}
 		}
 
+
 		/// <summary>
 		/// Use this method to register the contents of your App_Start folder.
 		/// </summary>
-		// ReSharper disable InconsistentNaming
+		// ReSharper disable once InconsistentNaming
 		protected virtual void Application_Start_RegisterConfigs()
 		{
 			// nothing to do in this assembly.
@@ -117,6 +117,7 @@
 		/// <summary>
 		/// Use this method to register your ORM database solution.
 		/// </summary>
+		// ReSharper disable once InconsistentNaming
 		protected virtual void Application_Start_InitializeDatabase()
 		{
 			// nothing to do in this assembly.
@@ -126,6 +127,7 @@
 		/// Use this method to add registries to the StructureMap container. Note you may want to call the base class method
 		/// before adding your own registries.
 		/// </summary>
+		// ReSharper disable once InconsistentNaming
 		protected virtual void Application_Start_Add_StructureMap_Registries()
 		{
 			ContainerFactory.Container.Configure(cfg =>
@@ -138,6 +140,5 @@
 				cfg.AddRegistry(new ModelMetadataModifierRegistry());
 			});
 		}
-		// ReSharper restore InconsistentNaming
 	}
 }
