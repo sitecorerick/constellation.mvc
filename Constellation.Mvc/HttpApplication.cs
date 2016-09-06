@@ -34,7 +34,7 @@
 		/// <summary>
 		/// The application begin request.
 		/// </summary>
-		public void Application_BeginRequest()
+		protected virtual void Application_BeginRequest()
 		{
 			Container = ContainerFactory.Container.GetNestedContainer();
 
@@ -58,7 +58,7 @@
 		/// <summary>
 		/// The application end request.
 		/// </summary>
-		public void Application_EndRequest()
+		protected virtual void Application_EndRequest()
 		{
 			if (Container != null)
 			{
