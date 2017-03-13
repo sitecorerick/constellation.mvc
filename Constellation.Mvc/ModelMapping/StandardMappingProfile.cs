@@ -7,10 +7,10 @@
 	public class StandardMappingProfile : Profile
 	{
 		/// <summary>
-		/// Override this method in a derived class and call the CreateMap method to associate that map with this profile.
+		/// Override this constructor in a derived class and call the CreateMap method to associate that map with this profile.
 		///             Avoid calling the <see cref="T:AutoMapper.Mapper"/> class from this method.
 		/// </summary>
-		protected override void Configure()
+		public StandardMappingProfile()
 		{
 			var types = TypeLoader.GetTypes();
 

@@ -1,6 +1,7 @@
 ﻿namespace Constellation.Mvc.ModelMapping
 {
 	using AutoMapper;
+	using AutoMapper.Configuration.Conventions;
 	using System;
 	using System.Linq;
 
@@ -28,7 +29,8 @@
 		{
 			get
 			{
-				return Configuration.CreateMapper();
+				var mapper = Configuration.CreateMapper();
+				return mapper;
 			}
 		}
 

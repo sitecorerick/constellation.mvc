@@ -17,8 +17,8 @@
 		- AutoMapper directives through Interfaces
 		- "Smart" Default Model Metadata values
 	</description>
-	<releaseNotes>Made a few HttpApplication methods virtual.</releaseNotes>
-	<copyright>Copyright 2016</copyright>
+	<releaseNotes>Updated Automapper and StructureMap</releaseNotes>
+	<copyright>Copyright 2017</copyright>
 	<tags>MVC 5, StructureMap, Automapper</tags>
   </metadata>
 </package>
