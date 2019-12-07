@@ -1,13 +1,15 @@
-﻿namespace Constellation.Mvc
+﻿using Constellation.Mvc.ApplicationTasks;
+using Constellation.Mvc.Injection;
+using Constellation.Mvc.InjectionRegistration;
+using StructureMap;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Constellation.Mvc
 {
-	using Constellation.Mvc.ApplicationTasks;
-	using Constellation.Mvc.Injection;
-	using Constellation.Mvc.InjectionRegistration;
-	using StructureMap;
-	using System;
-	using System.Diagnostics.CodeAnalysis;
-	using System.Web;
-	using System.Web.Mvc;
+
 
 	/// <summary>
 	/// Your Global.asax file should inherit from this class.

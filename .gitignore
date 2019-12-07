@@ -29,6 +29,7 @@ Databases/
 obj/
 [Bb]in/[Rr]elease*/
 _ReSharper*/
+.vs/*
 
 #files
 [Cc]onnection[Ss]trings.[Dd]ebug.config
